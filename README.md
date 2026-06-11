@@ -123,13 +123,13 @@ lib/
 
 ## APK
 
-The release APK is included in this repository:
-
 📥 [`releases/flutter-contacts-app.apk`](releases/flutter-contacts-app.apk)
 
+Works on **all Android devices** (ARM 32-bit, ARM 64-bit, x86).
+
 **To install:**
-1. Download the APK file
-2. On your Android device go to **Settings → Install unknown apps** and allow installation
+1. Download the APK file to your Android device
+2. Go to **Settings → Install unknown apps** and allow installation from your browser/file manager
 3. Open the downloaded APK and tap **Install**
 
 > Built with: `flutter build apk --release`
