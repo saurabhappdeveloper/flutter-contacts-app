@@ -156,7 +156,7 @@ lib/
 | Action | Steps |
 |--------|-------|
 | **Add a contact** | Tap the **＋** FAB button on the bottom right |
-| **Edit a contact** | Open contact → tap the **✏️ edit** icon |
+| **Edit a contact** | Open contact → tap the **edit** icon |
 | **Delete a contact** | Open contact → tap **⋮** → Delete, OR swipe left → Delete |
 | **Star a contact** | Open contact → tap **★**, OR swipe left → Star |
 | **View favorites** | Tap the **Favorites** tab in the bottom nav |
@@ -175,41 +175,6 @@ lib/
 | `READ_PHONE_STATE` | Android | Required to make direct calls |
 | `CALL_PHONE` | Android | Place calls without opening the dialer |
 | Photo library access | iOS | Pick a contact photo from gallery |
-
----
-
-## Database Schema
-
-```sql
-CREATE TABLE contacts (
-  id          INTEGER PRIMARY KEY AUTOINCREMENT,
-  name        TEXT    NOT NULL,
-  phone       TEXT    NOT NULL,
-  email       TEXT,
-  address     TEXT,
-  company     TEXT,
-  notes       TEXT,
-  avatar_path TEXT,
-  is_favorite INTEGER NOT NULL DEFAULT 0,
-  created_at  TEXT    NOT NULL
-);
-```
-
----
-
-## Dependencies
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  sqflite: ^2.3.0          # SQLite database
-  path: ^1.9.0              # File path utilities
-  url_launcher: ^6.3.1      # Open tel/sms/mailto URIs
-  image_picker: ^1.1.2      # Pick photos from gallery
-  flutter_slidable: ^3.1.1  # Swipe actions on list items
-  permission_handler: ^11.4.0 # Runtime permissions
-```
 
 ---
 
