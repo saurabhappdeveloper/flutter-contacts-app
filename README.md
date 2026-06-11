@@ -1,6 +1,6 @@
 # Flutter Contacts App
 
-A clean, fully-featured contacts manager built with Flutter and SQLite. Supports Android and iOS.
+A fully-featured contacts manager app built with Flutter, inspired by Google Contacts. Supports Android and iOS with a clean Material Design 3 UI and SQLite offline storage.
 
 ---
 
@@ -21,16 +21,57 @@ A clean, fully-featured contacts manager built with Flutter and SQLite. Supports
 
 ---
 
+## APK Download
+
+📥 **[Download APK](releases/flutter-contacts-app.apk)** — Works on all Android devices (ARM 32-bit, ARM 64-bit, x86)
+
+**Direct link:**
+```
+https://github.com/saurabhappdeveloper/flutter-contacts-app/raw/master/releases/flutter-contacts-app.apk
+```
+
+**To install:**
+1. Download the APK to your Android device
+2. Go to **Settings → Install unknown apps** and allow installation
+3. Open the downloaded APK and tap **Install**
+
+---
+
 ## Features
 
-- **Add / Edit / Delete contacts** — name, phone, email, company, address, notes, and photo
-- **Favorites** — star any contact to pin it in the Favorites tab for quick access
-- **Search** — real-time search by name, phone, or email
-- **Swipe actions** — swipe left on a contact to star or delete
-- **Contact detail** — full profile view with one-tap Call, Message, and Email actions
-- **Validation** — phone (7–15 digits, ITU-T E.164) and email (RFC 5322) validation
-- **Avatar** — auto-generated color initials; tap to pick a photo from gallery
-- **Offline-first** — all data stored locally using SQLite (sqflite)
+### User Interface
+- Material Design 3 with a clean, modern look
+- Responsive layout that adapts to all screen sizes
+- Smooth navigation and intuitive interactions
+- Color-coded avatars with auto-generated initials
+
+### Home Screen
+- **Bottom navigation bar** with two tabs:
+  - **Contacts** — full list of all saved contacts
+  - **Favorites** — grid view of starred contacts for quick access
+
+### Core Features
+- **View Contacts** — scrollable list with name, phone, and avatar
+- **Add Contact** — form with name, phone, email, company, address, notes, and photo
+- **Edit Contact** — update any contact's details
+- **Delete Contact** — delete with a confirmation dialog to prevent accidental removal
+- **Contact Profile** — full detail screen with all contact information
+- **Call Contact** — tap Call to directly dial the contact from the app
+- **Message Contact** — tap Message to open SMS app
+- **Email Contact** — tap Email to open mail app
+- **Favorite Contacts** — star/unstar contacts; starred contacts appear in the Favorites tab
+- **Search** — real-time search by name, phone number, or email
+- **Swipe Actions** — swipe left on any contact to Star or Delete
+
+### Validation
+- Phone: 7–15 digits, accepts international formats (ITU-T E.164)
+- Email: RFC 5322 standard validation
+- Errors shown inline as the user types
+
+### Data Storage
+- SQLite via `sqflite` — fully offline, no internet required
+- Data persists across app restarts
+- Auto-increment primary keys, alphabetically sorted contact list
 
 ---
 
@@ -41,32 +82,46 @@ A clean, fully-featured contacts manager built with Flutter and SQLite. Supports
 | Framework | Flutter 3.x (Dart) |
 | Database | SQLite via `sqflite` |
 | UI | Material Design 3 |
-| Image picker | `image_picker` |
-| URL actions | `url_launcher` |
-| Swipe actions | `flutter_slidable` |
+| Image Picker | `image_picker` |
+| URL Actions | `url_launcher` |
+| Swipe Actions | `flutter_slidable` |
 | Permissions | `permission_handler` |
 
 ---
 
-## Installation
+## Installation & Setup
 
 ### Prerequisites
 - Flutter SDK `>=3.0.0`
-- Android Studio / Xcode
-- A connected Android/iOS device or emulator
+- Dart SDK `>=3.0.0`
+- Android Studio or VS Code
+- Android device or emulator (API 21+)
 
 ### Steps
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/saurabhappdeveloper/flutter-contacts-app.git
+
+# 2. Navigate to the project folder
 cd flutter-contacts-app
 
-# 2. Install dependencies
+# 3. Install dependencies
 flutter pub get
 
-# 3. Run on a connected device
+# 4. Run the app on a connected device or emulator
 flutter run
+```
+
+### Build Release APK
+
+```bash
+flutter build apk --release
+```
+
+APK will be generated at:
+```
+build/app/outputs/flutter-apk/app-release.apk
 ```
 
 ---
@@ -75,40 +130,41 @@ flutter run
 
 ```
 lib/
-├── main.dart                        # App entry point
+├── main.dart                          # App entry point, theme setup
 ├── database/
-│   └── database_helper.dart         # SQLite CRUD operations
+│   └── database_helper.dart           # SQLite CRUD operations (singleton)
 ├── models/
-│   └── contact.dart                 # Contact data model
+│   └── contact.dart                   # Contact data model with toMap/fromMap
 ├── screens/
-│   ├── home_screen.dart             # Main scaffold with bottom nav
-│   ├── contacts_tab.dart            # Contacts list + search
-│   ├── favorites_tab.dart           # Starred contacts grid
-│   ├── add_edit_contact_screen.dart # Add / edit form
-│   └── contact_detail_screen.dart   # Full contact profile
+│   ├── home_screen.dart               # Main scaffold with bottom navigation
+│   ├── contacts_tab.dart              # Contacts list with search
+│   ├── favorites_tab.dart             # Starred contacts grid view
+│   ├── add_edit_contact_screen.dart   # Add and edit contact form
+│   └── contact_detail_screen.dart     # Full contact profile screen
 ├── utils/
-│   ├── app_colors.dart              # Color constants
-│   └── phone_utils.dart             # Call / SMS / Email actions
+│   ├── app_colors.dart                # App-wide color constants
+│   └── phone_utils.dart              # Call, SMS, and Email actions
 └── widgets/
-    ├── contact_avatar.dart          # Avatar with initials fallback
-    └── contact_list_tile.dart       # Swipeable list row
+    ├── contact_avatar.dart            # Avatar with photo or initials fallback
+    └── contact_list_tile.dart         # Swipeable contact list row
 ```
 
 ---
 
-## Usage
+## Usage Guide
 
-| Action | How |
-|--------|-----|
-| Add contact | Tap the **+** button (bottom right) |
-| Edit contact | Open contact → tap **edit** icon |
-| Delete contact | Open contact → tap **⋮** → Delete, OR swipe left → Delete |
-| Star contact | Open contact → tap **★**, OR swipe left → Star |
-| View favorites | Tap the **Favorites** tab |
-| Search | Type in the search bar on the Contacts tab |
-| Call | Open contact → tap **Call** button |
-| Message | Open contact → tap **Message** button |
-| Email | Open contact → tap **Email** button |
+| Action | Steps |
+|--------|-------|
+| **Add a contact** | Tap the **＋** FAB button on the bottom right |
+| **Edit a contact** | Open contact → tap the **✏️ edit** icon |
+| **Delete a contact** | Open contact → tap **⋮** → Delete, OR swipe left → Delete |
+| **Star a contact** | Open contact → tap **★**, OR swipe left → Star |
+| **View favorites** | Tap the **Favorites** tab in the bottom nav |
+| **Search contacts** | Type in the search bar at the top of the Contacts tab |
+| **Call a contact** | Open contact → tap **Call** button |
+| **Send a message** | Open contact → tap **Message** button |
+| **Send an email** | Open contact → tap **Email** button |
+| **Pick a photo** | Add/Edit contact → tap the avatar → choose from gallery |
 
 ---
 
@@ -116,20 +172,47 @@ lib/
 
 | Permission | Platform | Purpose |
 |-----------|----------|---------|
-| `READ_PHONE_STATE`, `CALL_PHONE` | Android | Direct call without opening dialer |
-| Photo library access | iOS | Pick contact photo from gallery |
+| `READ_PHONE_STATE` | Android | Required to make direct calls |
+| `CALL_PHONE` | Android | Place calls without opening the dialer |
+| Photo library access | iOS | Pick a contact photo from gallery |
 
 ---
 
-## APK
+## Database Schema
 
-📥 [`releases/flutter-contacts-app.apk`](releases/flutter-contacts-app.apk)
+```sql
+CREATE TABLE contacts (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  name        TEXT    NOT NULL,
+  phone       TEXT    NOT NULL,
+  email       TEXT,
+  address     TEXT,
+  company     TEXT,
+  notes       TEXT,
+  avatar_path TEXT,
+  is_favorite INTEGER NOT NULL DEFAULT 0,
+  created_at  TEXT    NOT NULL
+);
+```
 
-Works on **all Android devices** (ARM 32-bit, ARM 64-bit, x86).
+---
 
-**To install:**
-1. Download the APK file to your Android device
-2. Go to **Settings → Install unknown apps** and allow installation from your browser/file manager
-3. Open the downloaded APK and tap **Install**
+## Dependencies
 
-> Built with: `flutter build apk --release`
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: ^2.3.0          # SQLite database
+  path: ^1.9.0              # File path utilities
+  url_launcher: ^6.3.1      # Open tel/sms/mailto URIs
+  image_picker: ^1.1.2      # Pick photos from gallery
+  flutter_slidable: ^3.1.1  # Swipe actions on list items
+  permission_handler: ^11.4.0 # Runtime permissions
+```
+
+---
+
+## License
+
+This project was built as part of a Flutter Developer assignment for **Houzeo India**.
